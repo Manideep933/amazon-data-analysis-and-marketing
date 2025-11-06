@@ -1,0 +1,27 @@
+     <!DOCTYPE html>
+     <html>
+     <head><title>Amazon Data Analysis & Marketing</title></head>
+     <body>
+         <h1>Analyze Amazon Product for Marketing</h1>
+         <input id="asin" placeholder="Enter ASIN (e.g., B08N5WRWNW)">
+         <button onclick="analyze()">Analyze</button>
+         <div id="results"></div>
+         <script>
+             async function analyze() {
+                 const asin = document.getElementById('asin').value;
+                 const response = await fetch('https://your-api-gateway-url/analyze', {
+                     method: 'POST',
+                     headers: {'Content-Type': 'application/json'},
+                     body: JSON.stringify({asin})
+                 });
+                 const data = await response.json();
+                 document.getElementById('results').innerHTML = `
+                     <p>Total Reviews: ${data.total_reviews}</p>
+                     <p>Avg Sentiment: ${data.avg_sentiment}</p>
+                     <p>Marketing Tip: ${data.marketing_suggestion}</p>
+                 `;
+             }
+         </script>
+     </body>
+     </html>
+     
